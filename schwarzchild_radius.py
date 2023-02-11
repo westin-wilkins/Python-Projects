@@ -1,3 +1,4 @@
+# This program calculates the Schwarzchild radius of a given mass
 # Mass of the earth 5.97219e24 (kg)
 # Mass of the sun 1.9891e30 (kg)
 # Mass of Jupiter 1.89813e27 (kg)
