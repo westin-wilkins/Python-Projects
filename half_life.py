@@ -1,5 +1,6 @@
 import numpy as np
-# This program calculates the half life a given element.
+
+# This program calculates the half life of a given element.
 # Decay constant of U235 - 9.72e-10 (yr-1)
 # Decay constnat of U238 - 1.54e-10 (yr-1)
 # Decay constant of C14 - 3.8394e-12 (yr-1)
