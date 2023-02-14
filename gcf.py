@@ -14,4 +14,3 @@ def gcf(num1, num2):
     intersection = set(factorList1).intersection(factorList2)
     print(max(intersection))
 
-print(gcf(30, 50))
