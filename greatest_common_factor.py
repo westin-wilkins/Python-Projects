@@ -12,5 +12,5 @@ def gcf(num1, num2):
             factorList2.append(i)
         # Prints the intersection of num1 and num2 
     intersection = set(factorList1).intersection(factorList2)
-    print(max(intersection))
+    return (max(intersection))
 
