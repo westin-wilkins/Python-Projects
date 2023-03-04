@@ -2,7 +2,7 @@ import random
 
 # This program rolls two dice for both the player and computer and compares
 # the sum. It then compares the two values and decides who won the round.
-# This program also uses try/except to catch invalid responses. 
+# This program also uses try/except to catch invalid responses, unlike the rock, paper, scissors program that I made.
 
 # Keeps track of score for the duration of the game.
 player_score = 0
