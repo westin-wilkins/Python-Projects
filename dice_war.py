@@ -1,9 +1,7 @@
 import random
 
 # This program rolls two dice for both the player and computer and compares
-# the sum. It then compares the two values and decides who won the round.
-# This program also uses try/except to catch invalid responses. 
-
+# the sum.
 # Keeps track of score for the duration of the game.
 player_score = 0
 computer_score = 0
