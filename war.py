@@ -54,7 +54,7 @@ def main(cards):
             elif player_draw == computer_draw:
                 print("It's a tie!")
                 sleep(1)
-                print(f'Player Deck: {player_draw} Computer Deck: {computer_draw}')
+                print(f'Player Deck: {player_deck} Computer Deck: {computer_deck}')
                 print('Dealing again')
                 sleep(1)
                 i = 1
