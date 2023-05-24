@@ -7,6 +7,6 @@ g = 6.674E-11 # Gravitational constant
 c = 299792458 # Speed of light
 m = (float(input("Input a mass in (kg): "))) # Mass
 
-Schwarzchild_radius = 2*g*m/c**2
+schwarzchild_radius = 2*g*m/c**2
 
-print(f'The Schwarzchild radius is {Schwarzchild_radius * 100} (cm)') # The 100 converts m to cm
+print(f'The Schwarzchild radius is {schwarzchild_radius * 100} (cm)') # The 100 converts m to cm
