@@ -1,3 +1,5 @@
+# For easier debugging
+
 class Player:
     def __init__(self, name, starting_room, health = 100):
         self.name = name
