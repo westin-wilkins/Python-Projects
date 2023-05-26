@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# This program calculates the least square regression of two matricies and creates a graph. It also gives the mean squared error as well. 
+
 x_matrix = np.array([2, 3, 5, 7, 9])
 y_matrix = np.array([4, 5, 7, 10, 15])
 
