@@ -1,7 +1,7 @@
 import time
 import sys 
 import os
-
+# Class that takes the inputs from main() to initiate the player's desired actions
 class Player:
     def __init__(self, current_room, health = 100):
         self.current_room = current_room
@@ -14,8 +14,9 @@ class Player:
             print(f"There is no room {direction} of here.\n")
         else:
             self.current_room = self.current_room.exits[direction]
-            print(f"You move to the {self.current_room.name}.")
-            print(self.current_room.description)
+            print(f"You move to the {self.current_room.name}\n")
+            slow_print(self.current_room.description)
+            print(" ")
         
         if len(player.current_room.enemies_in_room) > 0:
             enemy = player.current_room.enemies_in_room[0]  # Assuming only one enemy per room for now
@@ -35,6 +36,7 @@ class Player:
     def pick_up_object(self, item_name):
         room = self.current_room
         found_item = False
+        print(f"Debugg: {item_name}")
         for r_item in room.contents:
             if r_item.name == item_name:
                 item = r_item
@@ -70,8 +72,10 @@ class Player:
     # Method that prints the weapon that is held in their hand
     def print_equipped(self):
         if self.equipped != fists:
-            print(f"You hold an {self.equipped.name} in your hand.")
+            os.system('cls')
+            print(f"You hold a {self.equipped.name} in your hand.")
         else:
+            os.system('cls')
             print("You are holding nothing.")
     
     def player_attack(self, enemy):
@@ -104,7 +108,7 @@ class Weapon(Item):
     def __init__(self, name, description, damage):
         super().__init__(name, description)
         self.damage = damage
-
+# A class that uses lists for items and enemies in the room which ever room the player is in
 class Room:
     def __init__(self, name, description):
         self.name = name
@@ -112,40 +116,48 @@ class Room:
         self.exits = {"north": None, "east": None, "south": None, "west": None}
         self.contents = []
         self.enemies_in_room = []
-
+# A class that initiates if there is an enemy in the room that the player moved into
+# If the player loses, the game ends
+# If the player wins, the enemy is removed from the room
 class Combat:
     def __init__(self, player, enemy):
         self.player = player
         self.enemy = enemy
+        
+    def remove_enemy(self, enemy):
+        self.player.current_room.enemies_in_room.remove(enemy)
     
     def start(self):
         slow_print(self.enemy.encounter_dialogue)
         print(f"You are now in combat with {self.enemy.name}")
         while self.player.health > 0 and self.enemy.health > 0:
             time.sleep(1)
-            combat_command = input("| Attack | Inventory | Equip |").lower()
+            combat_command = input("| Attack | Inventory | Equip |").split()
             os.system('cls')
-            if combat_command == "attack":
+            if combat_command[0] == "attack":
                 self.player.player_attack(self.enemy)
                 
-            elif combat_command == "inventory":
+            elif combat_command[0] == "inventory":
                 self.player.print_inventory()
                 
-            elif combat_command == "equip":
-                self.player.equip_object(self.player.item_name)
+            elif combat_command[0] == "equip":
+                item_name = ''.join(combat_command[1:])
+                self.player.equip_object(item_name)
+        
+            else:
+                print("Invalid input.")
                 
             if self.enemy.health > 0:
                 self.enemy.enemy_attack(self.player)
                 
         if self.player.health > 0:
             print(f"You have defeated the {self.enemy.name}")
+            self.remove_enemy(self.enemy)
+            
             
         else:
             print(f"You have been defeated by the {self.enemy.name}")
             return False
-
-    def remove_enemy(self, enemy):
-        self.player.current_room.enemies_in_room.remove(enemy)
 
 
 
@@ -157,7 +169,7 @@ fists = Weapon("fists", "Your fists.", 1)
 bite = Weapon(" ", " ", 5)
 possible_weapons = {"rusty dagger": rusty_dagger, "axe": axe}
 
-orc_1 = Enemies("Drutha The Orc", "A rotund green orc wielding an axe.", 50, axe)
+orc_1 = Enemies("Drutha The Orc", "A rotund green orc wielding an axe.", 10, axe)
 orc_1.encounter_dialogue = "Inside the guard room stands an orc wielding a battered iron axe covered in dried blood."
 
 wolf_1 = Enemies("Wolf.","A large diseased white wolf with mangled hair.", 30, bite)
@@ -166,8 +178,22 @@ guard_room = Room("Guard station.", "Guard station." )
 guard_room.enemies_in_room = [orc_1]
 
 cave_start = Room("Cave", "A dark and tenebrous cave.")
-cave_start.contents = [rapier]
+cave_start.contents = [rusty_dagger, axe]
 cave_start.exits["north"] = guard_room
+
+guard_room.exits["south"] = cave_start
+
+player = Player(cave_start, 100)
+
+
+
+       
+def slow_print(input_str):
+    for c in input_str:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.005)
+    sys.stdout.write('\n')
 
 player = Player(cave_start, 100)
 
