@@ -19,11 +19,10 @@ illuminating a rusty dagger on the floor.\n""")
     print("What do you do?")
     
     while True:
-        allowed_commands = ["move", "inventory", "pick up", "equip", "drop", "examine", "equipped", "quit"]
+        allowed_commands = ["move", "inventory", "pick", "equip", "drop", "examine", "equipped", "quit"]
         
         command = input("\n| Move [Cardinal Direction] | Inventory | Pick Up [Item] | Equip [Item]" \
                            "| Drop [Item] | Examine Room | Equipped Weapon | Quit | \n ").lower().split()
-        
         if command[0] in allowed_commands:
             if command[0] == "quit":
                 os.system('cls')
@@ -32,7 +31,7 @@ illuminating a rusty dagger on the floor.\n""")
             else:
                 player_actions(command)
         else:
-            os.system('cls')
+            
             invalid_input()
 
 
@@ -43,7 +42,7 @@ def player_actions(command):
         
     elif command[0] == "inventory":
         handle_inventory()
-        
+    
     elif command[0] == "pick":
         handle_pick_up(command)
         
@@ -89,7 +88,7 @@ def handle_inventory():
 
 def handle_pick_up(command):
     if len(command) > 2:
-        item = "_".join(command[2:])
+        item = " ".join(command[2:])
         os.system('cls')
         player.pick_up_object(item)
         
@@ -97,9 +96,10 @@ def handle_pick_up(command):
         os.system('cls')
         invalid_input()
         
+        
 def handle_equip(command):
     if len(command) > 1:
-        item = "_".join(command[1:])
+        item = " ".join(command[1:])
         os.system('cls')
         player.equip_object(item)
         
