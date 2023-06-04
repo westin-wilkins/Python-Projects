@@ -36,7 +36,6 @@ class Player:
     def pick_up_object(self, item_name):
         room = self.current_room
         found_item = False
-        print(f"Debugg: {item_name}")
         for r_item in room.contents:
             if r_item.name == item_name:
                 item = r_item
