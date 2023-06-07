@@ -1,4 +1,3 @@
-# Importing required modules
 import PyPDF2
   
 # Creates a pdf file object
