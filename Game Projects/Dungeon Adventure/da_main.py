@@ -107,7 +107,7 @@ def handle_drop(command):
     if len(command) > 1:
         item = "_".join(command[1:])
         os.system('cls')
-        player.inventory.drop_object(item)
+        player.drop_object(item)
     else:
         os.system('cls')
         invalid_input()
