@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
 
-
-
+# This is the first problem from the textbook "Python Programming and Numerical Methods"
+# Link: https://pythonnumericalmethods.berkeley.edu/notebooks/chapter22.08-Summary-and-Problems.html
 
 # Defines the Lorenz Attractor
 def my_lorenz_solver(t, s0, sigma, rho, beta):
