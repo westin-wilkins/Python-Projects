@@ -1,8 +1,6 @@
 import yfinance as yf
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
-import pandas as pd
 
 # Set the start and end date
 start_date = '2000-01-01'
