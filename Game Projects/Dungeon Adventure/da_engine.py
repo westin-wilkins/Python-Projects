@@ -12,8 +12,9 @@ class Player:
         self.inventory = [axe]
         self.equipped = fists
         self.health = health
-    # Method that moves the player around the map depending on the current rooms exits
+        
     def move(self, direction):
+        # Check to see if the current room has an exit in the direction that is inputted
         if self.current_room.exits[direction] is None:
             print(f"There is no room {direction} of here.\n")
         else:
@@ -21,13 +22,13 @@ class Player:
             print(f"You move to the {self.current_room.name}\n")
             slow_print(self.current_room.description)
             print(" ")
-        
+            
+        # If there is an enemy in the room that is moved into, the program will initiate combat
         if len(player.current_room.enemies_in_room) > 0:
             enemy = player.current_room.enemies_in_room[0]  # Assuming only one enemy per room for now
             combat = Combat(player, enemy)
             combat.start()
 
-    # Method that prints the player's inventory
     def print_inventory(self):
         objects_in_inventory = self.inventory
         if len(objects_in_inventory) == 0:
@@ -36,8 +37,10 @@ class Player:
             print("Your inventory:")
             for items in self.inventory:
                 print(f"- {items.name}")
-    # Method that picks up items from the room and adds them to the player's inventory
+                
     def pick_up_object(self, item_name):
+        # Checks to see if the item the player inputs is in the current room
+        # If it is, then the item is removed from the room's "inventory" and added to the player's 
         room = self.current_room
         found_item = False
         for r_item in room.contents:
@@ -49,8 +52,10 @@ class Player:
                 found_item = True
         if not found_item:
             print("That item is not in the room.")
-    # Method that equips a weapon from the player's inventory
+            
     def equip_object(self, item_name):
+        # If there is a weapon that is already equipped, it is moved into the player's inventory
+        # before the desired weapon is equipped. Also, prevents "fists" from being added to the inventory
         if self.equipped != fists:
             self.inventory.append(self.equipped)
         found_item = False    
@@ -61,10 +66,12 @@ class Player:
                 print(f"You equipped the {r_item.name}")
                 found_item = True
         if not found_item:
-            print("You don't have that in your inventory.")
-    # Method that drops an item from the player's inventory
+            print("You don't have that in your inventory.").
+            
     def drop_object(self, item_name):
-        found_item = False    
+        # Checks for the item inputted inside the player's inventory
+        # If it is in the player's inventory, then it is deleted
+        found_item = False
         for r_item in self.inventory:
             if r_item.name == item_name:
                 self.inventory.remove(r_item)
@@ -72,7 +79,7 @@ class Player:
                 found_item = True
         if not found_item:
             print("You don't have that in your inventory.")
-    # Method that prints the weapon that is held in their hand
+            
     def print_equipped(self):
         if self.equipped != fists:
             os.system('cls')
@@ -99,8 +106,10 @@ class Combat:
         print(f"{self.enemy.name} struck you for {damage} damage")
         print(" ")
         print(f"You have {player.health} health left.")  
-    # Removes enemy from the room's contents when defeated so that the player doesn't have to 
-    # fight it again
+        
+    # Removes enemy from the room when defeated so that the player doesn't have to 
+    # fight it again when moving back and forth between rooms. Also drops the enemies' items
+    # for the player to pick up
     def remove_enemy(self, enemy):
         if len(enemy.contents) != 0:
             print(f"{enemy.name} dropped: ")
@@ -116,7 +125,6 @@ class Combat:
             # Used so the player can check inventory and equip items without giving up a turn
             # The enemy only gets a turn once the player attacks (sets enemy_turn to true)
             enemy_turn = False
-            
             time.sleep(1)
             combat_command = input("| Attack | Inventory | Equip |").split()
             os.system('cls')
@@ -175,6 +183,7 @@ guard_room.exits["south"] = cave_start
 
 player = Player(cave_start, 100)
 
+# Makes the text scroll like an rpg
 def slow_print(input_str):
     for c in input_str:
         sys.stdout.write(c)
