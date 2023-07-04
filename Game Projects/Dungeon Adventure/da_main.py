@@ -8,17 +8,15 @@ import os
 def main():
     
     slow_print("""\nYou wake up to the sound of water striking the stone floor
-that you're laying on. You get up and rub at your eyes to find yourself
-inside of a dark cave. Torch light pours out from a room north of you,
-illuminating a rusty dagger on the floor.\n""")
+that you're laying on.\n""")
     
     print("What do you do?")
     
     while True:
-        allowed_commands = ["move", "inventory", "pick", "equip", "drop", "examine", "equipped", "quit"]
+        allowed_commands = ["move", "inventory", "pick", "equip", "drop", "examine", "equipped", "use", "quit"]
         
         command = input("\n| Move [Cardinal Direction] | Inventory | Pick Up [Item] | Equip [Item]" \
-                           "| Drop [Item] | Examine Room | Equipped Weapon | Quit | \n ").lower().split()
+                           "| Drop [Item] | Examine Room | Equipped Weapon | Use | Quit | \n ").lower().split()
         if command[0] in allowed_commands:
             if command[0] == "quit":
                 os.system('cls')
@@ -53,6 +51,9 @@ def player_actions(command):
             
     elif command[0] == "equipped":
         player.print_equipped()
+    
+    elif command[0] == "use":
+        handle_use(command)
     
 # Function that makes the text scroll like an rpg
 def slow_print(input_str):
@@ -105,7 +106,7 @@ def handle_equip(command):
         
 def handle_drop(command):
     if len(command) > 1:
-        item = "_".join(command[1:])
+        item = " ".join(command[1:])
         os.system('cls')
         player.drop_object(item)
     else:
@@ -129,6 +130,16 @@ def handle_examine(command):
     else:
         os.system('cls')
         invalid_input()
-        
+
+def handle_use(command):
+    if len(command) > 1:
+        item = " ".join(command[1:])
+        os.system('cls')
+        player.use(item)
+    
+    else:
+        os.system('cls')
+        invalid_input()
+       
 if __name__ == '__main__':
     main()

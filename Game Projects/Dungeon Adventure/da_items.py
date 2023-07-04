@@ -16,6 +16,6 @@ class HealingPotion(Item):
         self.effect = {"type": "healing", "amount": healing_amount}
         
 
-health_potion = HealingPotion("Healing Potion", "A giga healing potion", 5)
+
 
 

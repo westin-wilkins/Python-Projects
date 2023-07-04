@@ -9,7 +9,7 @@ import os
 class Player:
     def __init__(self, current_room, health = 100):
         self.current_room = current_room
-        self.inventory = [health_potion]
+        self.inventory = [axe, health_potion]
         self.equipped = fists
         self.health = health
         
@@ -35,8 +35,8 @@ class Player:
             print("You are carrying nothing.")
         else:
             print("Your inventory:")
-            for items in self.inventory:
-                print(f"- {items.name}")
+            for inv_items in self.inventory:
+                print(f"- {inv_items.name}")
                 
     def pick_up_object(self, item_name):
         # Checks to see if the item the player inputs is in the current room
@@ -59,11 +59,11 @@ class Player:
         if self.equipped != fists:
             self.inventory.append(self.equipped)
         found_item = False    
-        for r_item in self.inventory:
-            if r_item.name == item_name:
-                self.equipped = r_item
-                self.inventory.remove(r_item)
-                print(f"You equipped the {r_item.name}")
+        for inv_item in self.inventory:
+            if inv_item.name == item_name:
+                self.equipped = inv_item
+                self.inventory.remove(inv_item)
+                print(f"You equipped the {inv_item.name}")
                 found_item = True
         if not found_item:
             print("You don't have that in your inventory.")
@@ -72,10 +72,10 @@ class Player:
         # Checks for the item inputted inside the player's inventory
         # If it is in the player's inventory, then it is deleted
         found_item = False
-        for r_item in self.inventory:
-            if r_item.name == item_name:
-                self.inventory.remove(r_item)
-                print(f"You dropped the {r_item.name}")
+        for inv_item in self.inventory:
+            if inv_item.name == item_name:
+                self.inventory.remove(inv_item)
+                print(f"You dropped the {inv_item.name}")
                 found_item = True
         if not found_item:
             print("You don't have that in your inventory.")
@@ -88,10 +88,10 @@ class Player:
             os.system('cls')
             print("You are holding nothing.")
     
-    def use(self, item):
+    def use(self, item_name):
         found_item = False
         for inv_item in self.inventory:
-            if inv_item is item and isinstance(inv_item, HealingPotion):
+            if inv_item.name == item_name and isinstance(inv_item, HealingPotion):
                 self.health += inv_item.effect["amount"]
                 print(f"You gained {inv_item.effect['amount']}. Health: {self.health}")
                 found_item = True
@@ -191,15 +191,10 @@ cave_start.exits["north"] = guard_room
 
 guard_room.exits["south"] = cave_start
 
+health_potion = HealingPotion("health potion", "A giga healing potion", 5)
+
 player = Player(cave_start, 100)
 
-
-
-health_potion = HealingPotion("Healing Potion", "A giga healing potion", 5)
-
-
-
-print(player.use(health_potion))
 
 
 # Makes the text scroll like an rpg
