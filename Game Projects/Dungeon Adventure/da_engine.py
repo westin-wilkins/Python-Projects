@@ -66,7 +66,7 @@ class Player:
                 print(f"You equipped the {r_item.name}")
                 found_item = True
         if not found_item:
-            print("You don't have that in your inventory.").
+            print("You don't have that in your inventory.")
             
     def drop_object(self, item_name):
         # Checks for the item inputted inside the player's inventory
