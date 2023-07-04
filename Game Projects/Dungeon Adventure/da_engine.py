@@ -9,7 +9,7 @@ import os
 class Player:
     def __init__(self, current_room, health = 100):
         self.current_room = current_room
-        self.inventory = [axe]
+        self.inventory = [health_potion]
         self.equipped = fists
         self.health = health
         
@@ -88,6 +88,16 @@ class Player:
             os.system('cls')
             print("You are holding nothing.")
     
+    def use(self, item):
+        found_item = False
+        for inv_item in self.inventory:
+            if inv_item is item and isinstance(inv_item, HealingPotion):
+                self.health += inv_item.effect["amount"]
+                print(f"You gained {inv_item.effect['amount']}. Health: {self.health}")
+                found_item = True
+        if not found_item:
+            print("You don't have that in your inventory.")
+        
                
 class Combat:
     def __init__(self, player, enemy):
@@ -182,6 +192,15 @@ cave_start.exits["north"] = guard_room
 guard_room.exits["south"] = cave_start
 
 player = Player(cave_start, 100)
+
+
+
+health_potion = HealingPotion("Healing Potion", "A giga healing potion", 5)
+
+
+
+print(player.use(health_potion))
+
 
 # Makes the text scroll like an rpg
 def slow_print(input_str):
