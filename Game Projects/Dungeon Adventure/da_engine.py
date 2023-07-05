@@ -43,9 +43,9 @@ class Player:
         # If it is, then the item is removed from the room's "inventory" and added to the player's 
         room = self.current_room
         found_item = False
-        for r_item in room.contents:
-            if r_item.name == item_name:
-                item = r_item
+        for room_item in room.contents:
+            if room_item.name == item_name:
+                item = room_item
                 self.inventory.append(item)
                 room.contents.remove(item)
                 print(f"You picked up the {item.name}")
