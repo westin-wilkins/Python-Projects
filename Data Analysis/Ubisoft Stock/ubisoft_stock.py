@@ -1,7 +1,6 @@
 import yfinance as yf
 import matplotlib.pyplot as plt
 import pandas as pd
-import plotly.graph_objects as go
 
 # Set the start and end date
 start_date = '2015-01-01'
