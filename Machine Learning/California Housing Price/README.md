@@ -1,0 +1,1 @@
+This is a guided project to learn how to use methods in machine learning to make predictions on the California housing prices.
