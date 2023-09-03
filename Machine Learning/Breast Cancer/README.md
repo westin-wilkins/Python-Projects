@@ -1,0 +1,2 @@
+This code uses K-nearest-neighbors, a regresion algorithm, to predict whether a breast mass is malignant or benign using a breast cancer data set. 
+The x_new variable takes the predicted radius mean of a breast mass and prints within an array 1 (Malignant) or 0 (Benign).
