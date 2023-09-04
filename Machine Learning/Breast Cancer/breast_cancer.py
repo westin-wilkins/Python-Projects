@@ -21,10 +21,11 @@ prediction = knn.predict(X_new)
 
 # Plotting the radius values
 plt.scatter(X_train, y_train, c=y_train, cmap='viridis')
-plt.scatter(X_new, prediction)
+plt.scatter(X_new, prediction, label='Predicted Data')
 
 plt.xlabel('Radius Mean')
 plt.ylabel('Diagnosis')
+plt.legend()
 plt.title('Radius Mean vs Diagnosis')
 
 # 0 mean Benign | 1 means Malignant
