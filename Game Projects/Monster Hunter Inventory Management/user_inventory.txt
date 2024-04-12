@@ -1,0 +1,2 @@
+Name, Weapon Type, Damage, Affinity, Element, Element Damage
+red_wing_1, greatsword, 180, 0, fire, 36
